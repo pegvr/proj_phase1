@@ -21,7 +21,7 @@ Hashtable::Hashtable(const Hashtable& orig) {
 
 Hashtable::~Hashtable() 
 {
-    cout << "hashtable destruct 1" << endl;
+    //cout << "hashtable destruct 1" << endl;
     delete [] array;
    // cout << "hashtable destruct 2" << endl;
 }
@@ -42,7 +42,7 @@ void Hashtable::insertPoint( Point * newPoint )
     //array[ index ].insertPoint( newPoint );
 }
 
-void Hashtable::insertHamming(string temp, Hamming *HammingPoint )
+void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint)
 {
     //cout << "1 " << temp << endl;
     const char *point = temp.c_str();
@@ -50,7 +50,7 @@ void Hashtable::insertHamming(string temp, Hamming *HammingPoint )
     int index = strtol(point, NULL, 2);
     cout << "temp = " << temp << "index = " << index << endl;
     //cout << "3" << endl;
-    array[index].insertPoint(HammingPoint);
+    array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
     //array[index].printList();
     //cout << "4" << endl;
 }
@@ -72,7 +72,7 @@ Point * Hashtable::getPointByKey( string itemKey )
 }*/
 
 // Display the contents of the Hash Table to console window.
-void Hashtable::printTable()
+void Hashtable::printTable(string method)
 {
     //cout << "print table 1" << endl;
     cout << length;
@@ -83,7 +83,7 @@ void Hashtable::printTable()
     {
         //cout << "print table 3" << endl;
         cout << "Bucket " << i << ": ";
-        array[i].printList();
+        array[i].printList(method);
         //cout << "print table 4" << endl;
     }
 }

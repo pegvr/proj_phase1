@@ -32,7 +32,6 @@ private:
     string id;
     int length;
     int pos;
-    string cs;
 };
 
 #endif /* COSINESIM_H */

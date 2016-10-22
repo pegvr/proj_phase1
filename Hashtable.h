@@ -8,7 +8,6 @@
 #ifndef HASHTABLE_H
 #define	HASHTABLE_H
 #include "LinkedList.h"
-#include "Hamming.h"
 
 class Hashtable {
 public:
@@ -28,7 +27,7 @@ public:
     Point * getPointByKey( string itemKey );
     
     // Display the contents of the Hash Table to console window.
-    void printTable();
+    void printTable(string method);
     
     // Prints a histogram illustrating the Point distribution.
     void printHistogram();
@@ -38,7 +37,7 @@ public:
     
     // Returns the number of Points in the Hash Table.
     int getNumberOfPoints();
-    void insertHamming(string temp, Hamming *HammingPoint);
+    void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint);
 private:
     // Array is a reference to an array of Linked Lists.
     string name;
@@ -50,5 +49,3 @@ private:
     // Returns an array location for a given item key.
     int hash( string itemKey );
 };
-#endif	/* HASHTABLE_H */
-

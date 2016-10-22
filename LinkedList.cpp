@@ -41,10 +41,10 @@ LinkedList::~LinkedList()
 }
 
 // Inserts an item at the end of the list.
-void LinkedList::insertPoint( Hamming * newPoint )
+void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint)
 {
-    cout << "linked list insert id = " << newPoint->getId()<< endl;
-    Point *temp = new Point(newPoint);
+   // cout << "linked list insert id = " << newPoint->getId()<< endl;
+    Point *temp = new Point(HammingPoint, CosinePoint, EuclideanPoint);
     //cout << "linked list 1" << endl;
     if (!head -> next)
     {
@@ -56,14 +56,6 @@ void LinkedList::insertPoint( Hamming * newPoint )
     }
     temp->next = head->next;
     head->next = temp;
-    /*Point * p = head;
-    Point * q = head;
-    while (q != NULL)
-    {
-        p = q;
-        q = p -> next;
-    }
-    p -> next = temp;*/
     length++;
 }
 
@@ -107,7 +99,7 @@ void LinkedList::insertPoint( Hamming * newPoint )
 }*/
 
 // Displays list contents to the console window.
-void LinkedList::printList()
+void LinkedList::printList(string method)
 {
     //cout << "print 1" << endl;
     if (length == 0)
@@ -122,7 +114,8 @@ void LinkedList::printList()
     while (p)
     {
         //cout << "print 4" << endl;
-        cout << p -> key->getId();
+        if (method == "@metric_space hamming")
+            cout << p -> hamming_key->getId();
         //cout << "print 5" << endl;
         if (p -> next) cout << ", ";
         else break;

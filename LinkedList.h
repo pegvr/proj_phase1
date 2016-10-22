@@ -11,20 +11,25 @@
 #include <iostream>
 #include <string>
 #include "Hamming.h"
-
-using namespace std;
-
+#include "CosineSim.h"
+#include "Euclidean.h"
 
 struct Point
 {
-    Hamming *key;
+    Hamming *hamming_key;
+    Euclidean *euclidean_key;
+    CosineSim *cosine_key;
     Point * next;
     Point(){};
-    Point(Hamming * newPoint)
+    Point(Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint)
     {
         //cout << "!!!!" << endl;
         //cout << "point " << newPoint->getId() << endl;
-        key = newPoint; 
+        //key = newPoint; 
+
+        hamming_key = HammingPoint;
+        euclidean_key = EuclideanPoint;
+        cosine_key = CosinePoint;
         next = NULL; 
         //cout << "!!!!!!!!!!" << key->getId() << endl;
     };
@@ -36,7 +41,7 @@ public:
     LinkedList(const LinkedList& orig);
     virtual ~LinkedList();
     // Inserts an item at the end of the list.
-    void insertPoint( Hamming * newPoint );
+    void insertPoint( Hamming * newPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint);
     
     // Removes an item from the list by item key.
     // Returns true if the operation is successful.
@@ -48,7 +53,7 @@ public:
     //Point * getPoint( string itemKey );
     
     // Displays list contents to the console window.
-    void printList();
+    void printList(string method);
     
     // Returns the length of the list.
     int getLength();
@@ -58,7 +63,6 @@ private:
     // Length is the number of data nodes.
     int length;
 };
-
 #endif	/* LINKEDLIST_H */
 
 
