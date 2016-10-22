@@ -1,0 +1,31 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+#include "randomfunc.h"
+
+double marsagliarandom() // pseudo-random function for normal uniform
+{
+    static double x1 , x2 , r, y1, y2, z;
+    int t;
+    do
+    {
+        x1 = (rand() / ((double)RAND_MAX)) * 2.0 - 1.0;
+        x2 = (rand() / ((double)RAND_MAX)) * 2.0 - 1.0;
+        r = x1*x1 + x2*x2;
+    }
+    while ((r>=1.0)|| (r==0.0));
+    y1 = sqrt(-2.0 *( log(r*r) / (r*r)));
+    y1 = y1 * x1;
+    y2 = sqrt(-2.0 *log(r*r) / (r*r));
+    y2 = y2 *x2;
+    srand(time(0));
+    for (int i = 0; i < 100; i++) // choose between y1 and y2
+    {t = rand() % 2;}
+    if (t==0)
+    {
+        return y1;
+    }
+    return y2;}
