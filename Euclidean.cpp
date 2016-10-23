@@ -1,9 +1,4 @@
-/* 
- * File:   Euclidean.cpp
- * Author: angelique
- * 
- * Created on October 21, 2016, 12:11 AM
- */
+
 
 #include "Euclidean.h"
 #include "randomfunc.h"
@@ -28,12 +23,11 @@ Euclidean::~Euclidean()
 
 string Euclidean::ConstructGFunctionC(int L, int k)
 {
-    int sum = 0 , r, w = 4, h , fi;
-    int l=0;
-    int p = 0;
-    double res;
+    int sum = 0 ,l=0, p=0, r, w = 4, h , fi;
+    //int l=0;
+    //int p = 0;
+    double res , v;
     string st;
-    double v;
     float t;
     long long M = pow(2.0,32) - 5;
     for( int i=0;i<length;i++)
@@ -74,5 +68,6 @@ string Euclidean::ConstructGFunctionC(int L, int k)
         cout << "sum = " << sum << endl;       
     }
     euclideanid = sum % M;
-    fi = euclideanid % (L / 2);
+    fi = euclideanid % (L / 2); //mod
+    cout << "fi :"<< fi << "\n";
 }
