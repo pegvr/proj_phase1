@@ -7,6 +7,7 @@
 
 #include "Euclidean.h"
 #include "randomfunc.h"
+#include <sstream>
 
 Euclidean::Euclidean(string temp) 
 {
@@ -28,11 +29,32 @@ Euclidean::~Euclidean()
 string Euclidean::ConstructGFunctionC(int L, int k)
 {
     int sum = 0 , r, w = 4, h , fi;
-    double r , res;
-    string h;
+    int l=0;
+    int p = 0;
+    double res;
+    string st;
     double v;
     float t;
     long long M = pow(2.0,32) - 5;
+    for( int i=0;i<length;i++)
+        {
+            //cout << "hello here \n";
+            st = id[i];
+            if(st == "\t")
+            {
+                p=p+1;
+            }
+        }
+        cout << p;
+        l = p+1 ; //number of doubles
+        double array[l];
+        std :: istringstream iss(id);
+        for (auto& i : array)
+        {
+            iss>> i;
+        }
+        
+       // cout <<"the number of doubles is :" << l<<"\n";
     for(int i = 0; i < k; i++)
     {
         r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
@@ -41,24 +63,10 @@ string Euclidean::ConstructGFunctionC(int L, int k)
         cout << "w = " << w << endl;
         v = marsagliarandom();
         cout << "v = " << v << endl;
-        for(i=0;i<length;i++)
-        {
-            h=id[i];
-            if(h == "\t")
-            {
-                p=p+1;
-            }
-        }
-        double array[l];
-        std :: istringstream iss(id);
-        for (auto& i : array)
-        {
-            iss>> i;
-        }
-        l = p+1 ; //number of doubles
+        
         for (int j=0;j<l;j++)
         {
-            res = array[j]*v + res ; 
+            res = array[j]*v + res ; //eswteriko ginomeno
             
         }
         int h = int((res + t) / w);
