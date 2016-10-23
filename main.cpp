@@ -92,9 +92,7 @@ int main(int argc, char** argv)
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
                     g = hamming[j]->ConstructGFunction(L, k);      //g function=concatenation of random h
-                    //g = "00001";
-                    //cout << "g = " << g << endl;
-                    PointersToHashtable[i]->InsertIntoHashtable(g, hamming[j], NULL, NULL);
+                    PointersToHashtable[i]->InsertIntoHashtable(g, hamming[j], NULL, NULL, 0);
                     //cout << "after insert hamming to hash" << endl;
                     //break;
                 }
@@ -156,9 +154,8 @@ int main(int argc, char** argv)
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
                     g = cosine[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
-                   // g = "00001";
                     cout << "g = " << g << endl;
-                    //PointersToHashtable[i]->insertHamming(g, hamming[j], method);
+                    PointersToHashtable[i]->InsertIntoHashtable(g, NULL, cosine[j], NULL, 0);
                    // cout << "after insert cosine to hash" << endl;
                     break;
                 }
@@ -191,11 +188,9 @@ int main(int argc, char** argv)
                 cout << L;
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
-                    g = euclidean[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
-                   // g = "00001";
-                    cout << "g = " << g << endl;
-                    //PointersToHashtable[i]->insertHamming(g, hamming[j], method);
-                   // cout << "after insert cosine to hash" << endl;
+                    int fi = euclidean[j]->ConstructFiFunctionC(L, k);      //g function=concatenation of random h
+                    cout << "fi = " << fi << endl;
+                    PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
                     break;
                 }
                 j++;

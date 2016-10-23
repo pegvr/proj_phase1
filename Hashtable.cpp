@@ -42,13 +42,17 @@ void Hashtable::insertPoint( Point * newPoint )
     //array[ index ].insertPoint( newPoint );
 }
 
-void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint)
+void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi)
 {
     //cout << "1 " << temp << endl;
-    const char *point = temp.c_str();
-   // cout << "2" << endl;
-    int index = strtol(point, NULL, 2);
-    cout << "temp = " << temp << "index = " << index << endl;
+    if (fi == 0)
+    {
+        const char *point = temp.c_str();
+        int index = strtol(point, NULL, 2);
+        cout << "temp = " << temp << "index = " << index << endl;
+    }
+    else
+        index = fi;
     //cout << "3" << endl;
     array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
     //array[index].printList();

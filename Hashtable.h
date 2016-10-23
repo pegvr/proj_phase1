@@ -37,7 +37,7 @@ public:
     
     // Returns the number of Points in the Hash Table.
     int getNumberOfPoints();
-    void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint);
+    void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi);
 private:
     // Array is a reference to an array of Linked Lists.
     string name;

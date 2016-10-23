@@ -19,7 +19,7 @@ public:
     Euclidean(string temp);
     Euclidean(const Euclidean& orig);
     virtual ~Euclidean();
-    string ConstructGFunctionC(int L, int k);
+    int ConstructFiFunctionC(int L, int k);
 private:
     string id;
     int length;
