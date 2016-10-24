@@ -51,7 +51,7 @@ string CosineSim :: getId()
 }
 
 string CosineSim::ConstructGFunctionC(int L, int k)
-{
+{   srand(time(0));
     cout << "bhka";
     int i, x1, x2, p;
     int l; //length of the new array

@@ -25,7 +25,6 @@ double marsagliarandom() // pseudo-random function for normal uniform
     y1 = y1 * x1;
     y2 = sqrt(-2.0 *log(r*r) / (r*r));
     y2 = y2 *x2;
-    srand(time(0));
     for (int i = 0; i < 100; i++) // choose between y1 and y2
     {t = rand() % 2;}
     if (t==0)
