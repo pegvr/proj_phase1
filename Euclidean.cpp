@@ -4,6 +4,8 @@
 #include "randomfunc.h"
 #include <sstream>
 
+
+
 Euclidean::Euclidean(string temp) 
 {
     id = temp;
@@ -19,6 +21,11 @@ Euclidean::Euclidean(const Euclidean& orig) {
 Euclidean::~Euclidean() 
 {
     cout << "Euclidean is destroyed";
+}
+
+string Euclidean:: getId()
+{
+    return id;
 }
 
 int Euclidean::ConstructFiFunctionC(int L, int k)
@@ -47,14 +54,18 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
         {
             iss>> i;
         }
-        
+     srand(time(NULL));    
        // cout <<"the number of doubles is :" << l<<"\n";
     for(int i = 0; i < k; i++)
     {
+       
         r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
+        
         cout << "r = " << r << endl;
+        srand(1);
         t = float (rand() / (RAND_MAX + 1.0)) * ( w + 1);
-        cout << "w = " << w << endl;
+        //srand(time(NULL));
+        cout << "t = " << t << endl;
         v = marsagliarandom();
         cout << "v = " << v << endl;
         
@@ -65,8 +76,10 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
         }
         int h = int((res + t) / w);
         sum = sum + r * h;
-        cout << "sum = " << sum << endl;       
+        cout << "sum = " << sum << endl;      
+        //srand(time(NULL));
     }
     euclideanid = sum % M;
     return fi = euclideanid % (L / 2); //mod
+    
 }

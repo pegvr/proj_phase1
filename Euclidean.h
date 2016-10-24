@@ -11,6 +11,7 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ public:
     Euclidean(const Euclidean& orig);
     virtual ~Euclidean();
     int ConstructFiFunctionC(int L, int k);
+    string getId();
 private:
     string id;
     int length;

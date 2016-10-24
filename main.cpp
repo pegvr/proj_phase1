@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <string.h>
+#include <time.h>
 //#include <vector>
 #include "Hamming.h"
 #include "Hashtable.h"
@@ -25,8 +26,11 @@ int main(int argc, char** argv)
     string line, temp, g;
     //if (argv[2] != NULL)
     ifstream myfile(argv[2]);
-    int k = atoi(argv[6]);
-    int L = atoi(argv[8]);
+    //int k = atoi(argv[6]);
+    //int L = atoi(argv[8]);
+    int k=5;
+    int L=4;
+    myfile.open("DataEuclidean.csv");
     if (myfile.is_open())
     {
         getline (myfile,line);          //First line of file shows which method to implement        
@@ -105,7 +109,7 @@ int main(int argc, char** argv)
         //cout << "after break" << endl;
         
     
-        if ( 3==5)//line ==  "@metric_space cosine")
+        if ( 5==5)//line ==  "@metric_space cosine")
         {
             cout << '\n';
             getline (myfile,line);
@@ -148,47 +152,58 @@ int main(int argc, char** argv)
                 cout << '\n';
                 cosine[j] = new CosineSim(temp);   //pointer to class for point 
                 cout << L;
+               
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
+                    //srand(time(0));
                     g = cosine[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
                    // g = "00001";
                     cout << "g = " << g << endl;
                     PointersToHashtable[i]->InsertIntoHashtable(g, NULL, cosine[j], NULL, 0);
                    // cout << "after insert cosine to hash" << endl;
-                    break;
+                   
+                    
                 }
+               
                 j++;
-                //PointersToHashtable[0]->printTable();
+                PointersToHashtable[0]->printTable("@metric_space cosine");
+                
                 cout << "before break" << endl;
                 break;
             }
             
                  
         } 
+       
         if ( 3==5)//line ==  "@metric_space euclidean")
         {
             getline (myfile,line);
-            cout << line << '\n';
+            cout <<"grammh"<< line << '\n';
             int i, j = 0;
 
             size_t pos;
             Euclidean **euclidean = new Euclidean*[counter];
-            
+            //getline (myfile,line) ;
+            //line.erase(line.size()-1);
+            //getline (myfile,line) ;
+            //line.erase(line.size()-1);
+            //cout << line;
             while ( getline (myfile,line) )
             {
-                cout << line << '\n';
+                //cout << "GRAMMH"<<line << '\n';
                 pos = line.find("\t");
                 //cout << pos;
                 temp = line.substr(pos, line.size()-2);
-                //cout << temp << '\n';
+                //cout << "TO TEMP EINAI" << temp << '\n';
                 cout << '\n';
                 euclidean[j] = new Euclidean(temp);   //pointer to class for point 
                 cout << L;
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
+                    cout << "yah";
                     int fi = euclidean[j]->ConstructFiFunctionC(L, k);      //g function=concatenation of random h
                     cout << "fi = " << fi << endl;
-                    PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
+                    //PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
                    // cout << "after insert cosine to hash" << endl;
                     break;
                 }

@@ -117,6 +117,10 @@ void LinkedList::printList(string method)
         //cout << "print 4" << endl;
         if (method == "@metric_space hamming")
             cout << p -> hamming_key->getId();
+        else if (method == "@metric_space cosine")
+            cout << p -> cosine_key->getId();
+        else 
+            cout << p -> euclidean_key->getId();
         //cout << "print 5" << endl;
         if (p -> next) cout << ", ";
         else break;
