@@ -21,7 +21,7 @@ Euclidean::~Euclidean()
     cout << "Euclidean is destroyed";
 }
 
-string Euclidean::ConstructGFunctionC(int L, int k)
+int Euclidean::ConstructFiFunctionC(int L, int k)
 {
     int sum = 0 ,l=0, p=0, r, w = 4, h , fi;
     //int l=0;
@@ -68,6 +68,5 @@ string Euclidean::ConstructGFunctionC(int L, int k)
         cout << "sum = " << sum << endl;       
     }
     euclideanid = sum % M;
-    fi = euclideanid % (L / 2); //mod
-    cout << "fi :"<< fi << "\n";
+    return fi = euclideanid % (L / 2); //mod
 }

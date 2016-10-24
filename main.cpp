@@ -1,24 +1,19 @@
-/* 
- * File:   main.cpp
- * Author: angelique
- *
- * Created on October 17, 2016, 6:45 PM
- */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstdlib>
 #include <fstream>
 #include <string.h>
-#include <vector>
+//#include <vector>
 #include "Hamming.h"
 #include "Hashtable.h"
 #include "CosineSim.h"
+#include "Euclidean.h"
 
 using namespace std;
 
 /*
- * 
+ *
  */
 
 int main(int argc, char** argv) 
@@ -94,7 +89,7 @@ int main(int argc, char** argv)
                     g = hamming[j]->ConstructGFunction(L, k);      //g function=concatenation of random h
                     //g = "00001";
                     //cout << "g = " << g << endl;
-                    PointersToHashtable[i]->InsertIntoHashtable(g, hamming[j], NULL, NULL);
+                    PointersToHashtable[i]->InsertIntoHashtable(g, hamming[j], NULL, NULL, 0);
                     //cout << "after insert hamming to hash" << endl;
                     //break;
                 }
@@ -158,7 +153,7 @@ int main(int argc, char** argv)
                     g = cosine[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
                    // g = "00001";
                     cout << "g = " << g << endl;
-                    //PointersToHashtable[i]->insertHamming(g, hamming[j], method);
+                    PointersToHashtable[i]->InsertIntoHashtable(g, NULL, cosine[j], NULL, 0);
                    // cout << "after insert cosine to hash" << endl;
                     break;
                 }
@@ -191,10 +186,9 @@ int main(int argc, char** argv)
                 cout << L;
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
-                    g = euclidean[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
-                   // g = "00001";
-                    cout << "g = " << g << endl;
-                    //PointersToHashtable[i]->insertHamming(g, hamming[j], method);
+                    int fi = euclidean[j]->ConstructFiFunctionC(L, k);      //g function=concatenation of random h
+                    cout << "fi = " << fi << endl;
+                    PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
                    // cout << "after insert cosine to hash" << endl;
                     break;
                 }

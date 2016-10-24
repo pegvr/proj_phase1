@@ -64,7 +64,7 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         }
     }
     l = p+1 ; 
-    cout << "\n"<<l <<"\n";
+    cout << "number \n"<<l <<"\n";
     double array[l];
     std :: istringstream iss(id);
     for (auto& i : array)
