@@ -62,12 +62,11 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
         r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
         
         cout << "r = " << r << endl;
-        srand(1);
         t = float (rand() / (RAND_MAX + 1.0)) * ( w + 1);
         //srand(time(NULL));
         cout << "t = " << t << endl;
         v = marsagliarandom();
-        cout << "v = " << v << endl;
+        cout << "\n\nv = " << v << endl;
         
         for (int j=0;j<l;j++)
         {

@@ -109,7 +109,7 @@ int main(int argc, char** argv)
         //cout << "after break" << endl;
         
     
-        if ( 5==5)//line ==  "@metric_space cosine")
+        if ( 3==5)//line ==  "@metric_space cosine")
         {
             cout << '\n';
             getline (myfile,line);
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
                  
         } 
        
-        if ( 3==5)//line ==  "@metric_space euclidean")
+        if ( 5==5)//line ==  "@metric_space euclidean")
         {
             getline (myfile,line);
             cout <<"grammh"<< line << '\n';
