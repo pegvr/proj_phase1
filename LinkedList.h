@@ -19,9 +19,17 @@ struct Point
     Hamming *hamming_key;
     Euclidean *euclidean_key;
     CosineSim *cosine_key;
+    int *row;
     Point * next;
-    Point(){};
-    Point(Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint)
+    Point()
+    {
+        hamming_key = NULL;
+        euclidean_key = NULL;
+        cosine_key = NULL;
+        row = NULL;
+        next = NULL; 
+    };
+    Point(Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int *Row)
     {
         //cout << "!!!!" << endl;
         //cout << "point " << newPoint->getId() << endl;
@@ -30,6 +38,7 @@ struct Point
         hamming_key = HammingPoint;
         euclidean_key = EuclideanPoint;
         cosine_key = CosinePoint;
+        row = Row;
         next = NULL; 
         //cout << "!!!!!!!!!!" << key->getId() << endl;
     };
@@ -41,19 +50,9 @@ public:
     LinkedList(const LinkedList& orig);
     virtual ~LinkedList();
     // Inserts an item at the end of the list.
-    void insertPoint( Hamming * newPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint);
+    void insertPoint( Hamming * newPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint, int * Row);
     
-    // Removes an item from the list by item key.
-    // Returns true if the operation is successful.
-    //bool removePoint( string itemKey );
-    
-    // Searches for an item by its key.
-    // Returns a reference to first match.
-    // Returns a NULL pointer if no match is found.
-    //Point * getPoint( string itemKey );
-    
-    // Displays list contents to the console window.
-    void printList(string method);
+    void printList(string method, int counter);
     
     // Returns the length of the list.
     int getLength();

@@ -90,3 +90,8 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
     cout << "\nL:" << L << endl;
     return mod(euclideanid, L); //mod
 }
+
+string Euclidean:: getId()
+{
+    return id;
+}

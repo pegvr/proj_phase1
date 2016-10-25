@@ -49,20 +49,22 @@ void Hashtable::insertPoint( Point * newPoint )
     //array[ index ].insertPoint( newPoint );
 }
 
-void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi)
-{    
-    //cout << "1 " << temp << endl;
+void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint,int *Row, int fi)
+{
+    //cout << "hashtable 1 " << temp << endl;
+    //int index;
     if (fi == 0)
     {
         const char *point = temp.c_str();
-        int index = strtol(point, NULL, 2);
-        cout << "temp = " << temp << "index = " << index << endl;
-        array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
+        //cout << "point = " << point << endl;
+        int index = strtol(point, NULL, 2); 
+        array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint, Row);
     }
-    else
-        array[fi].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
-    //array[index].printList();
-    //cout << "4" << endl;
+    else{
+        //index = fi;
+        array[fi].insertPoint(HammingPoint, CosinePoint, EuclideanPoint, Row);
+    }
+        
 }
 
 // Deletes an Point by key from the Hash Table.
@@ -82,7 +84,7 @@ Point * Hashtable::getPointByKey( string itemKey )
 }*/
 
 // Display the contents of the Hash Table to console window.
-void Hashtable::printTable(string method)
+void Hashtable::printTable(string method, int counter)
 {
     //cout << "print table 1" << endl;
     cout << length;
@@ -93,7 +95,12 @@ void Hashtable::printTable(string method)
     {
         //cout << "print table 3" << endl;
         cout << "Bucket " << i << ": ";
-        array[i].printList(method);
+        array[i].printList(method, counter);
         //cout << "print table 4" << endl;
     }
+}
+
+int Hashtable::getLength()
+{
+    return length;
 }

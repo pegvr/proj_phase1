@@ -27,7 +27,7 @@ public:
     Point * getPointByKey( string itemKey );
     
     // Display the contents of the Hash Table to console window.
-    void printTable(string method);
+    void printTable(string method, int counter);
     
     // Prints a histogram illustrating the Point distribution.
     void printHistogram();
@@ -37,7 +37,7 @@ public:
     
     // Returns the number of Points in the Hash Table.
     int getNumberOfPoints();
-    void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi);
+    void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int *Row, int fi);
 private:
     // Array is a reference to an array of Linked Lists.
     string name;

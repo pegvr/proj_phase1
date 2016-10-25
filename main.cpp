@@ -8,7 +8,8 @@
 #include "Hamming.h"
 #include "Hashtable.h"
 #include "CosineSim.h"
-#include 
+#include "DistanceMatrix.h"
+
 using namespace std;
 
 /*
@@ -198,30 +199,21 @@ int main(int argc, char** argv)
         if( line == "@metric_space matri")
         {
             getline (myfile,line);
-            //cout << line << endl;
-            Hashtable **PointersToHashtable = CreateHash(L, k, counter);
-            size_t pos;
+            Hashtable **PointersToHashtable = CreateHash(L, k, 0);
             int i;
             DistanceMatrix *distancematrix = new DistanceMatrix(argv[2],counter, k);
-            //distancematrix->PrintMatrix();
-            //int x1 = (rand() / (RAND_MAX + 1.0))*(distancematrix->getNumOfRecors() + 1);
-            //int x2 = (rand() / (RAND_MAX + 1.0))*(distancematrix->getNumOfRecors() + 1);
-            //cout << x1 << "    " << x2 << endl;
             for (i = 0; i < distancematrix->getNumOfRecors(); i++)
             {
-                //int *row = distancematrix->getRow(i);
+                int *row = distancematrix->getRow(i);
                 for (int j = 0; j < L; j++)             //insert point into all hashtables
                 {                   
                     string g = distancematrix->ConstructGFunction(i, k);      //g function=concatenation of random h
-                    cout << "g = " << g << endl;
-                    //PointersToHashtable[j]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
-                    //break;
+                    PointersToHashtable[j]->InsertIntoHashtable(g, NULL, NULL, NULL, row, 0);
                 }
-                //for (int j = 0; j< distancematrix->getNumOfRecors();j++) cout << row[j] << endl;  
-                //break;
             }
-            //for (i=0; i< L;i++) PointersToHashtable[i]->printTable("@metric_space matrix");
-            for (i = 0; i < L; i++) { cout << "delete hash " << i << endl;delete PointersToHashtable[i];}
+            //for (i = 0; i < L;i++) PointersToHashtable[i]->printTable("@metric_space matrix", counter);
+            for (i = 0; i < L; i++)  delete PointersToHashtable[i];
+            delete distancematrix;
         }
     }
     else cout << "Unable to open file"; 
