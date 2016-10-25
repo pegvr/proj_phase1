@@ -104,18 +104,19 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         cout << res;
         if(res >= 0)
         {
-            cout << "bainw";
+            //cout << "bainw";
              g = g + "0";
-             cout << "\nto neo g einai :"<< g;
+             //cout << "\nto neo g einai :"<< g;
         }
         else
         {
              g = g + "1";
-             cout << "\nto neo g einai :"<< g;
+             //cout << "\nto neo g einai :"<< g;
         }
         
         cout << g;
         //g = "0010";
     }
+  
     return g;
 }

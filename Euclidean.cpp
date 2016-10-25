@@ -30,7 +30,7 @@ string Euclidean:: getId()
 
 int Euclidean::ConstructFiFunctionC(int L, int k)
 {
-    int sum = 0 ,l=0, p=0, r, w = 4, h , fi;
+    int sum = 0 ,l=0, p=0, r, w = 4, fi;
     //int l=0;
     //int p = 0;
     double res , v;
@@ -55,13 +55,17 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
             iss>> i;
         }
      srand(time(NULL));    
-       // cout <<"the number of doubles is :" << l<<"\n";
+      // cout <<"the number of doubles is :" << l<<"\n";
+    
+    int h[k];
+        
     for(int i = 0; i < k; i++)
     {
+        int n=0;
        
-        r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
+       /* r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
         
-        cout << "r = " << r << endl;
+        cout << "r = " << r << endl;*/
         t = float (rand() / (RAND_MAX + 1.0)) * ( w + 1);
         //srand(time(NULL));
         cout << "t = " << t << endl;
@@ -73,12 +77,30 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
             res = array[j]*v + res ; //eswteriko ginomeno
             
         }
-        int h = int((res + t) / w);
-        sum = sum + r * h;
-        cout << "sum = " << sum << endl;      
+        //int h = int((res + t) / w);
+        
+        h[i]=int((res + t) / w);
+        cout << "\nto h einai:" << h[i];
+        //sum = (sum + r * h);
+        
+        //cout << "sum = " << sum << endl;      
         //srand(time(NULL));
     }
-    euclideanid = sum % M;
-    return fi = euclideanid % (L / 2); //mod
+        for (int i=0;i<k;i++)
+        {   
+            r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
+        
+            cout << "r = " << r << endl;
+            sum = mod((h[i]*r),M) + sum; //(a+b)modm = ((amodm)+(bmodm))modm
+        }
+    
+    
+     
+    cout << "eukleidian id:";
+    euclideanid =mod(sum,M);
+   
+    cout << euclideanid;
+    cout << "\nL:" <<L;
+    return fi = mod(euclideanid,(L/4)); //mod
     
 }

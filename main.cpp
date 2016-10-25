@@ -109,7 +109,7 @@ int main(int argc, char** argv)
         //cout << "after break" << endl;
         
     
-        if ( 3==5)//line ==  "@metric_space cosine")
+        if ( 5==5)//line ==  "@metric_space cosine")
         {
             cout << '\n';
             getline (myfile,line);
@@ -175,7 +175,7 @@ int main(int argc, char** argv)
                  
         } 
        
-        if ( 5==5)//line ==  "@metric_space euclidean")
+        if ( 3==5)//line ==  "@metric_space euclidean")
         {
             getline (myfile,line);
             cout <<"grammh"<< line << '\n';
@@ -201,14 +201,16 @@ int main(int argc, char** argv)
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
                     cout << "yah";
-                    int fi = euclidean[j]->ConstructFiFunctionC(L, k);      //g function=concatenation of random h
+                    int length = PointersToHashtable[i]->getLength();
+                    int fi = euclidean[j]->ConstructFiFunctionC(length, k);
+                         //g function=concatenation of random h
                     cout << "fi = " << fi << endl;
-                    //PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
+                    PointersToHashtable[i]->InsertIntoHashtable("", NULL, NULL, euclidean[j], fi);
                    // cout << "after insert cosine to hash" << endl;
                     break;
                 }
                 j++;
-                //PointersToHashtable[0]->printTable();
+                PointersToHashtable[0]->printTable("@metric_space euclidean");
                 cout << "before break" << endl;
                 break;
             }
