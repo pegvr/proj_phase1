@@ -48,4 +48,6 @@ private:
     
     // Returns an array location for a given item key.
     int hash( string itemKey );
+    
 };
+#endif

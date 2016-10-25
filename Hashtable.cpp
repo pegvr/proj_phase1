@@ -8,6 +8,10 @@
 #include "Hamming.h"
 #include <math.h>
 
+#include "Hashtable.h"
+#include "Hamming.h"
+#include <math.h>
+
 Hashtable::Hashtable(string temp, int k) 
 {
     name = temp;
@@ -34,7 +38,10 @@ int Hashtable::hash( string itemKey )
         value += itemKey[i];
     return (itemKey.length() * value) % length;
 }
-
+int Hashtable::getLength()
+{
+    return length;
+}
 // Adds an item to the Hash Table.
 void Hashtable::insertPoint( Point * newPoint )
 {
@@ -44,6 +51,7 @@ void Hashtable::insertPoint( Point * newPoint )
 
 void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi)
 {
+    
     //cout << "1 " << temp << endl;
     if (fi == 0)
     {
@@ -53,8 +61,14 @@ void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSi
     }
     else
         index = fi;
+        int ind = strtol(point, NULL, 2);
+        cout << "temp = " << temp << "index = " << index << endl;
+        array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
+    }
+    else
+    { int ind = fi;
     //cout << "3" << endl;
-    array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
+    array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);}
     //array[index].printList();
     //cout << "4" << endl;
 }

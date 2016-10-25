@@ -7,6 +7,8 @@
 #include "CosineSim.h"
 #include "Hashtable.h"
 #include "randomfunc.h"
+#include "time.h"
+
 
 
 CosineSim::CosineSim(string temp) 
@@ -49,9 +51,9 @@ string CosineSim :: getId()
 }
 
 string CosineSim::ConstructGFunctionC(int L, int k)
-{
+{   srand(time(0));
     cout << "bhka";
-    int i, x1, x2, p;
+    int i, x1, x2, p=0;
     int l; //length of the new array
     double r , res;
     string h , f;
@@ -64,15 +66,14 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         }
     }
     l = p+1 ; 
-    cout << "\n"<<l <<"\n";
+    cout << "number \n"<<l <<"\n";
     double array[l];
     std :: istringstream iss(id);
     for (auto& i : array)
     {
         iss>> i;
     }
-    
-    
+   
     /*char temp1[10];
     string temp;
     Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
@@ -87,28 +88,35 @@ string CosineSim::ConstructGFunctionC(int L, int k)
   
    
     string g;
-    
-     for (i = 0; i < (k / 2); i++)
+    int j;
+     for (j = 0; j < (k); j++)
     {
+         //srand(time(0));
         r = marsagliarandom();
-        for (int j=0;j<l;j++)
+        cout << "\n\n\nto r einai:"<< r;
+        for (int i=0;i<l;i++)
         {
-            res = array[j]*r + res ; 
+            cout << array[i]<< "\n";
+            res = array[i]*r + res ; 
+            cout <<"res:" << res;
             
         }
         cout << res;
         if(res >= 0)
         {
-            cout << "bainw";
+            //cout << "bainw";
              g = g + "0";
+             //cout << "\nto neo g einai :"<< g;
         }
         else
         {
              g = g + "1";
+             //cout << "\nto neo g einai :"<< g;
         }
         
         cout << g;
         //g = "0010";
     }
+  
     return g;
 }

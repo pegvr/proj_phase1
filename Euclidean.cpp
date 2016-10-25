@@ -1,13 +1,10 @@
-/* 
- * File:   Euclidean.cpp
- * Author: angelique
- * 
- * Created on October 21, 2016, 12:11 AM
- */
+
 
 #include "Euclidean.h"
 #include "randomfunc.h"
 #include <sstream>
+
+
 
 Euclidean::Euclidean(string temp) 
 {
@@ -53,21 +50,30 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
     // cout <<"the number of doubles is :" << l<<"\n";
     for(int i = 0; i < k; i++)
     {
-        r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
-        cout << "r = " << r << endl;
+        int n=0;
+       
+       /* r = (rand() / (RAND_MAX + 1.0)) * ( (pow(2.0,31)-1) + 1);
+        
+        cout << "r = " << r << endl;*/
         t = float (rand() / (RAND_MAX + 1.0)) * ( w + 1);
-        cout << "w = " << w << endl;
+        //srand(time(NULL));
+        cout << "t = " << t << endl;
         v = marsagliarandom();
-        cout << "v = " << v << endl;
+        cout << "\n\nv = " << v << endl;
         
         for (int j = 0;j < l;j++)
         {
             res = array[j]*v + res ; //eswteriko ginomeno
             
         }
-        int h = int((res + t) / w);
-        sum = sum + r * h;
-        cout << "sum = " << sum << endl;       
+        //int h = int((res + t) / w);
+        
+        h[i]=int((res + t) / w);
+        cout << "\nto h einai:" << h[i];
+        //sum = (sum + r * h);
+        
+        //cout << "sum = " << sum << endl;      
+        //srand(time(NULL));
     }
     euclideanid = sum % M;
     return fi = euclideanid % (L / 2);

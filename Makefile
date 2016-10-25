@@ -61,7 +61,7 @@ build: .build-post
 
 
 # clean
-clean: .clean-post
+
 
 .clean-pre:
 # Add your pre 'clean' code here...
@@ -81,15 +81,33 @@ clobber: .clobber-post
 
 
 # all
-all: .all-post
+all: main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o randomfunc.o 
+	g++ -g main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o randomfunc.o -o lsh -lm
 
-.all-pre:
-# Add your pre 'all' code here...
+main.o: main.cpp Hamming.h Hashtable.h
+	g++ -c -g main.cpp
 
-.all-post: .all-impl
-# Add your post 'all' code here...
+LinkedList.o:LinkedList.cpp 
+	g++ -c -g LinkedList.cpp
 
+Hashtable.o: Hashtable.cpp LinkedList.h Hashtable.h
+	g++ -c -g Hashtable.cpp 
 
+Hamming.o: Hamming.cpp Hashtable.h Hamming.h
+	g++ -c -g Hamming.cpp
+	
+CosineSim.o: CosineSim.cpp CosineSim.h Hashtable.h randomfunc.h
+	g++ -std=c++0x -c -g CosineSim.cpp
+	
+Euclidean.o: Euclidean.cpp Euclidean.h
+	g++ -c -g Euclidean.cpp -lm
+	
+randomfunc.o: randomfunc.cpp randomfunc.h
+	g++ -c -g randomfunc.cpp
+
+clean:
+	rm -f *.o lsh
+	
 # build tests
 build-tests: .build-tests-post
 
