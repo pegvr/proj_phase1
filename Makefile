@@ -81,8 +81,8 @@ clobber: .clobber-post
 
 
 # all
-all: main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o randomfunc.o 
-	g++ -g main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o randomfunc.o -o lsh -lm
+all: main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o 
+	g++ -g main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o -o lsh -lm
 
 main.o: main.cpp Hamming.h Hashtable.h
 	g++ -c -g main.cpp
@@ -99,8 +99,11 @@ Hamming.o: Hamming.cpp Hashtable.h Hamming.h
 CosineSim.o: CosineSim.cpp CosineSim.h Hashtable.h randomfunc.h
 	g++ -std=c++0x -c -g CosineSim.cpp
 	
+DistanceMatrix.o: DistanceMatrix.cpp DistanceMatrix.h
+	g++ -std=c++0x -c -g DistanceMatrix.cpp 
+	
 Euclidean.o: Euclidean.cpp Euclidean.h
-	g++ -c -g Euclidean.cpp -lm
+	g++ -std=c++0x -c -g Euclidean.cpp
 	
 randomfunc.o: randomfunc.cpp randomfunc.h
 	g++ -c -g randomfunc.cpp
