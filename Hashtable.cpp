@@ -8,14 +8,12 @@
 #include "Hamming.h"
 #include <math.h>
 
-#include "Hashtable.h"
-#include "Hamming.h"
-#include <math.h>
 
-Hashtable::Hashtable(string temp, int k) 
+Hashtable::Hashtable(string temp, int k, int tablesize) 
 {
     name = temp;
-    length = pow(2.0, k);
+    if (tablesize == 0) length = pow(2.0, k);
+    else length = tablesize / 16;
     cout << "length " << length << endl;
     array = new LinkedList[ length ];
 }

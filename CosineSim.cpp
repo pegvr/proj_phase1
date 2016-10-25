@@ -5,8 +5,7 @@
  */
 #include <sstream>
 #include "CosineSim.h"
-#include "Hashtable.h"
-#include "randomfunc.h"
+#include "functions.h"
 #include "time.h"
 
 
@@ -21,18 +20,8 @@ CosineSim::CosineSim(string temp)
     length = id.length();
     cout << "hello";
     cout << length;
-    /*int pos;
-    for (int i=0;i<length;i++)
-    {
-        while (id[i] =! "\n" )
-        {
-            if(id[i]=="\t")
-                pos=i;
-                
-            
-        }
-    }
-    */
+   
+   
     
     
 }
@@ -74,15 +63,7 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         iss>> i;
     }
    
-    /*char temp1[10];
-    string temp;
-    Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
-    for(i = 0; i < L; i++)
-    {       
-        sprintf(temp1, "%d", i);        //Hashtable number
-        temp = 'g' + temp1;
-        PointersToHashtable[i] = new Hashtable (temp, k);
-    }*/
+   
     
     
   
@@ -104,7 +85,7 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         cout << res;
         if(res >= 0)
         {
-            //cout << "bainw";
+           
              g = g + "0";
              //cout << "\nto neo g einai :"<< g;
         }

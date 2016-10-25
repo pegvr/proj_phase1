@@ -10,12 +10,28 @@
 #include "Hashtable.h"
 #include "CosineSim.h"
 #include "Euclidean.h"
+#include "functions.h"
 
 using namespace std;
 
 /*
  *
  */
+
+
+Hashtable ** CreateHash(int L, int k, int tablesize)
+{
+    Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
+    char temp1[10];
+    string temp;
+    for (int i = 0; i < L; i++)
+    {                
+        sprintf(temp1, "%d", i);        //Hashtable number
+        temp = 'g' + temp1;
+        PointersToHashtable[i] = new Hashtable (temp, k, tablesize);
+    }
+    return PointersToHashtable;
+}
 
 int main(int argc, char** argv) 
 {
@@ -36,17 +52,7 @@ int main(int argc, char** argv)
         getline (myfile,line);          //First line of file shows which method to implement        
         //cout << "line =" << line << line.size()<< '\n';
         line.erase(line.size()-1);
-        string method = line;
-        cout << "method =" << method << line.size()<< '\n';
-        Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
-        char temp1[10];
-        for (int i = 0; i < L; i++)
-        {                
-            sprintf(temp1, "%d", i);        //Hashtable number
-            temp = 'g' + temp1;
-            PointersToHashtable[i] = new Hashtable (temp, k);
-        }
-        //for (i=0; i< L;i++) PointersToHashtable[i]->printTable();
+       
         int counter = 0;
         while ( getline (myfile,line) ) counter++;                  //Count num of records into given file
         cout << "file has number of records: " << counter << endl; 
@@ -60,21 +66,8 @@ int main(int argc, char** argv)
         {
             cout << line << '\n';
             int i, j = 0;
-           /* Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
-            char temp1[10];
-            for (i = 0; i < L; i++)
-            {                
-                sprintf(temp1, "%d", i);        //Hashtable number
-                temp = 'g' + temp1;
-                PointersToHashtable[i] = new Hashtable (temp, k);
-            }*/
-            //for (i=0; i< L;i++) PointersToHashtable[i]->printTable();
-            /*int counter = 0;
-            while ( getline (myfile,line) ) counter++;
-            cout << "file has number of records: " << counter << endl; 
-            myfile.clear() ;
-            myfile.seekg(0, ios::beg) ;
-            getline (myfile,line) ;*/
+            Hashtable **PointersToHashtable = CreateHash(L, k , 0);
+           
             size_t pos;
             Hamming **hamming = new Hamming*[counter];
             while ( getline (myfile,line) )
@@ -82,11 +75,7 @@ int main(int argc, char** argv)
                 cout << line << '\n';
                 pos = line.find("\t");
                 temp = line.substr(pos, line.size()-2);
-                //cout << temp << '\n';
-                //for (int i = 0 ; i < temp.length(); i++)
-                //    if (temp[i] == ' ') temp.erase(i, 1);
-                //remove(temp.begin(), temp.end(), ' ');
-                //cout << temp << '\n';
+                
                 hamming[j] = new Hamming(temp);     //pointer to hamming class for point j
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
@@ -102,7 +91,7 @@ int main(int argc, char** argv)
                 //cout << "before break" << endl;
                 //break;
             }
-            for (i=0; i< L;i++) PointersToHashtable[i]->printTable(method);
+            for (i=0; i< L;i++) PointersToHashtable[i]->printTable("@metric_space hamming");
             for (i = 0; i < L; i++) { cout << "delete hash " << i << endl;delete PointersToHashtable[i];}
             for (i = 0; i < j; i++) delete hamming[i];
         }
@@ -133,13 +122,9 @@ int main(int argc, char** argv)
             myfile.clear() ;
             myfile.seekg(0, ios::beg) ; //reread the file */
             size_t pos;
+            Hashtable **PointersToHashtable = CreateHash(L, k, 0);
             CosineSim **cosine = new CosineSim*[counter];
-            /*cout << line << endl;;
-            getline (myfile,line);
-            line.erase(line.size()-1);
-            getline (myfile,line);
-            line.erase(line.size()-1);
-            cout << "line = " << line << line.size()<< '\n';*/
+            
            
             while ( getline (myfile,line) )
             {
@@ -155,7 +140,7 @@ int main(int argc, char** argv)
                
                 for (i = 0; i < L; i++)             //insert point into all hashtables
                 {
-                    //srand(time(0));
+                    
                     g = cosine[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
                    // g = "00001";
                     cout << "g = " << g << endl;
@@ -169,7 +154,7 @@ int main(int argc, char** argv)
                 PointersToHashtable[0]->printTable("@metric_space cosine");
                 
                 cout << "before break" << endl;
-                break;
+                
             }
             
                  
@@ -180,14 +165,9 @@ int main(int argc, char** argv)
             getline (myfile,line);
             cout <<"grammh"<< line << '\n';
             int i, j = 0;
-
+            Hashtable **PointersToHashtable = CreateHash(L, k, counter);
             size_t pos;
             Euclidean **euclidean = new Euclidean*[counter];
-            //getline (myfile,line) ;
-            //line.erase(line.size()-1);
-            //getline (myfile,line) ;
-            //line.erase(line.size()-1);
-            //cout << line;
             while ( getline (myfile,line) )
             {
                 //cout << "GRAMMH"<<line << '\n';
@@ -224,3 +204,5 @@ int main(int argc, char** argv)
     
     return 0;
 }
+
+

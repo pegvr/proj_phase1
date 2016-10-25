@@ -1,7 +1,7 @@
 
 
 #include "Euclidean.h"
-#include "randomfunc.h"
+#include "functions.h"
 #include <sstream>
 
 
@@ -31,8 +31,6 @@ string Euclidean:: getId()
 int Euclidean::ConstructFiFunctionC(int L, int k)
 {
     int sum = 0 ,l=0, p=0, r, w = 4, fi;
-    //int l=0;
-    //int p = 0;
     double res , v;
     string st;
     float t;
