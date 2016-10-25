@@ -11,7 +11,7 @@
 
 class Hashtable {
 public:
-    Hashtable(string temp, int k);
+    Hashtable(string temp, int k, int tablesize);
     Hashtable(const Hashtable& orig);
     virtual ~Hashtable();
     

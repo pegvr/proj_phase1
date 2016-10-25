@@ -10,7 +10,6 @@
 #include "time.h"
 
 
-
 CosineSim::CosineSim(string temp) 
 {
     id=temp;

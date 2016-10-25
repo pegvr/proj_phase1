@@ -6,7 +6,6 @@
 
 #include "randomfunc.h"
 
-
 double marsagliarandom() // pseudo-random function for normal uniform
 {
     

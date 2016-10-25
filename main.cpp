@@ -4,17 +4,15 @@
 #include <cstdlib>
 #include <fstream>
 #include <string.h>
-#include <time.h>
-//#include <vector>
+#include <vector>
 #include "Hamming.h"
 #include "Hashtable.h"
 #include "CosineSim.h"
-#include "Euclidean.h"
 
 using namespace std;
 
 /*
- *
+ * 
  */
 
 Hashtable ** CreateHash(int L, int k, int tablesize)
@@ -33,18 +31,11 @@ Hashtable ** CreateHash(int L, int k, int tablesize)
 
 int main(int argc, char** argv) 
 {
-   /* string temp = "0000000011";
-    const char  *l = temp.c_str();
-    int kol = strtol(l, NULL, 2);
-    cout << kol << endl;*/
     string line, temp, g;
     //if (argv[2] != NULL)
     ifstream myfile(argv[2]);
-    //int k = atoi(argv[6]);
-    //int L = atoi(argv[8]);
-    int k=5;
-    int L=4;
-    myfile.open("DataEuclidean.csv");
+    int k = atoi(argv[6]);
+    int L = atoi(argv[8]);
     if (myfile.is_open())
     {
         getline (myfile,line);          //First line of file shows which method to implement        
@@ -126,7 +117,7 @@ int main(int argc, char** argv)
         //cout << "after break" << endl;
         
     
-        if ( 5==5)//line ==  "@metric_space cosine")
+        if ( 3==5)//line ==  "@metric_space cosine")
         {
             getline (myfile,line);
             //cout <<"EIMAI XAZO KAI DEN DIAVAZW THN PRWTH GRAMMH" << endl;
@@ -156,7 +147,6 @@ int main(int argc, char** argv)
                     //cout << "after insert cosine to hash" << endl;
                     //break;
                 }
-               
                 j++;
                 //PointersToHashtable[0]->printTable();
                 //cout << "before break" << endl;
@@ -175,18 +165,14 @@ int main(int argc, char** argv)
             Hashtable **PointersToHashtable = CreateHash(L, k, counter);
             size_t pos;
             Euclidean **euclidean = new Euclidean*[counter];
-            //getline (myfile,line) ;
-            //line.erase(line.size()-1);
-            //getline (myfile,line) ;
-            //line.erase(line.size()-1);
-            //cout << line;
+            
             while ( getline (myfile,line) )
             {
                 //cout << line << '\n';
                 pos = line.find("\t");
                 //cout << pos;
                 temp = line.substr(pos, line.size()-2);
-                //cout << "TO TEMP EINAI" << temp << '\n';
+                //cout << temp << '\n';
                 cout << '\n';
                 euclidean[j] = new Euclidean(temp);   //pointer to class for point 
                 cout << L;
@@ -204,7 +190,7 @@ int main(int argc, char** argv)
                 //cout << "before break" << endl;
                 //break;
             }
-            //for (i=0; i< L;i++) PointersToHashtable[i]->printTable("@metric_space euclidean");
+            for (i=0; i< L;i++) PointersToHashtable[i]->printTable("@metric_space euclidean");
             for (i = 0; i < L; i++) { cout << "delete hash " << i << endl;delete PointersToHashtable[i];}
             for (i = 0; i < j; i++) delete euclidean[i];
         }

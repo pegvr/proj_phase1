@@ -7,15 +7,15 @@
 #include "Hashtable.h"
 #include "Hamming.h"
 #include <math.h>
-
 #include "Hashtable.h"
 #include "Hamming.h"
 #include <math.h>
 
-Hashtable::Hashtable(string temp, int k) 
+Hashtable::Hashtable(string temp, int k, int tablesize) 
 {
     name = temp;
-    length = pow(2.0, k);
+    if (tablesize == 0) length = pow(2.0, k);
+    else length = tablesize / 16;
     cout << "length " << length << endl;
     array = new LinkedList[ length ];
 }
@@ -50,25 +50,17 @@ void Hashtable::insertPoint( Point * newPoint )
 }
 
 void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int fi)
-{
-    
+{    
     //cout << "1 " << temp << endl;
     if (fi == 0)
     {
         const char *point = temp.c_str();
         int index = strtol(point, NULL, 2);
         cout << "temp = " << temp << "index = " << index << endl;
+        array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
     }
     else
-        index = fi;
-        int ind = strtol(point, NULL, 2);
-        cout << "temp = " << temp << "index = " << index << endl;
-        array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
-    }
-    else
-    { int ind = fi;
-    //cout << "3" << endl;
-    array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);}
+        array[fi].insertPoint(HammingPoint, CosinePoint, EuclideanPoint);
     //array[index].printList();
     //cout << "4" << endl;
 }
