@@ -5,8 +5,9 @@
  */
 #include <sstream>
 #include "CosineSim.h"
-#include "functions.h"
+#include "randomfunc.h"
 #include "time.h"
+#include "Hashtable.h"
 
 
 
@@ -98,6 +99,6 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         cout << g;
         //g = "0010";
     }
-  
+
     return g;
 }

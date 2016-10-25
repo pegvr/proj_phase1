@@ -5,6 +5,7 @@
  * Created on October 17, 2016, 9:16 PM
  */
 
+
 #include "Hamming.h"
 
 Hamming::Hamming(string temp) 
