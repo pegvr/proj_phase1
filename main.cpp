@@ -10,7 +10,7 @@
 #include "Hashtable.h"
 #include "CosineSim.h"
 #include "Euclidean.h"
-#include "functions.h"
+#include "randomfunc.h"
 
 using namespace std;
 
@@ -39,13 +39,14 @@ int main(int argc, char** argv)
     const char  *l = temp.c_str();
     int kol = strtol(l, NULL, 2);
     cout << kol << endl;*/
-    string line, temp, g;
+    string line, temp,g;
     //if (argv[2] != NULL)
     ifstream myfile(argv[2]);
     //int k = atoi(argv[6]);
     //int L = atoi(argv[8]);
-    int k=5;
-    int L=4;
+    int k=4;
+    int L=5;
+     
     myfile.open("DataEuclidean.csv");
     if (myfile.is_open())
     {
@@ -100,10 +101,10 @@ int main(int argc, char** argv)
     
         if ( 5==5)//line ==  "@metric_space cosine")
         {
-            cout << '\n';
+            //cout << '\n';
             getline (myfile,line);
             //cout <<"EIMAI XAZO KAI DEN DIAVAZW THN PRWTH GRAMMH" << endl;
-            cout << line << '\n';
+           // cout << line << '\n';
             int i, j = 0;
            /* Hashtable **PointersToHashtable = new Hashtable*[L];  //Table which points to g1,g2,...,gl hashtables
             char temp1[10];
@@ -124,40 +125,49 @@ int main(int argc, char** argv)
             size_t pos;
             Hashtable **PointersToHashtable = CreateHash(L, k, 0);
             CosineSim **cosine = new CosineSim*[counter];
-            
+      
            
             while ( getline (myfile,line) )
             {
                 
-                cout << line << '\n';
+               // cout << line << '\n';
                 pos = line.find("\t");
                 //cout << pos;
                 temp = line.substr(pos, line.size()-2);
                 //cout << temp << '\n';
-                cout << '\n';
+                //cout << '\n';
                 cosine[j] = new CosineSim(temp);   //pointer to class for point 
-                cout << L;
+               // cout << L;
+                
                
-                for (i = 0; i < L; i++)             //insert point into all hashtables
-                {
+                
+                i=0;
+                do//insert point into all hashtables
+                { 
+                    g = cosine[j]->ConstructGFunctionC(L, k); 
                     
-                    g = cosine[j]->ConstructGFunctionC(L, k);      //g function=concatenation of random h
+                    //g = cosine[j]->ConstructGFunctionC(L, k);  
+                    //g function=concatenation of random h
                    // g = "00001";
-                    cout << "g = " << g << endl;
+                    //cout << "g = " << g << endl;
                     PointersToHashtable[i]->InsertIntoHashtable(g, NULL, cosine[j], NULL, 0);
                    // cout << "after insert cosine to hash" << endl;
-                   
-                    
-                }
-               
+                  
+                  // PointersToHashtable[0]->printTable("@metric_space cosine");
+                    i++;
+                }while(i<L);
+                
+                //break;
                 j++;
-                PointersToHashtable[0]->printTable("@metric_space cosine");
+                //PointersToHashtable[0]->printTable("@metric_space cosine");
                 
-                cout << "before break" << endl;
-                
+                //cout << "before break" << endl;
+               
             }
             
-                 
+           //for (i = 0; i< L;i++) PointersToHashtable[i]->printTable("@metric_space cosine");
+           // for (i = 0; i < L; i++) { /*cout << "delete hash " << i << endl;*/delete PointersToHashtable[i];}
+           // for (i = 0; i < j; i++) delete cosine[i];  
         } 
        
         if ( 3==5)//line ==  "@metric_space euclidean")
