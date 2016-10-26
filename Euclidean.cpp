@@ -5,7 +5,6 @@
 #include <sstream>
 
 
-
 Euclidean::Euclidean(string temp) 
 {
     id = temp;
@@ -67,7 +66,7 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
         t = float (rand() / (RAND_MAX + 1.0)) * ( w + 1);
         //srand(time(NULL));
         //cout << "t = " << t << endl;
-        v = marsagliarandom();
+        v = marsagliarandom(i);
         //cout << "\n\nv = " << v << endl;
         
         for (int j=0;j<l;j++)
@@ -92,12 +91,10 @@ int Euclidean::ConstructFiFunctionC(int L, int k)
         sum = mod((h[i]*r),M) + sum; //(a+b)modm = ((amodm)+(bmodm))modm
     }
     
-    
-     
-    cout << "eukleidian id:";
     euclideanid =mod(sum,M);
    
     cout << "eukleidian id:" << euclideanid << endl;
     cout << "\nL:" << L << endl;
     return mod(euclideanid, L); //mod
 }
+

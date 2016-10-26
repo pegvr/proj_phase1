@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/CosineSim.o \
+	${OBJECTDIR}/DistanceMatrix.o \
 	${OBJECTDIR}/Euclidean.o \
 	${OBJECTDIR}/Hamming.o \
 	${OBJECTDIR}/Hashtable.o \
@@ -72,6 +73,11 @@ ${OBJECTDIR}/CosineSim.o: CosineSim.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CosineSim.o CosineSim.cpp
+
+${OBJECTDIR}/DistanceMatrix.o: DistanceMatrix.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DistanceMatrix.o DistanceMatrix.cpp
 
 ${OBJECTDIR}/Euclidean.o: Euclidean.cpp
 	${MKDIR} -p ${OBJECTDIR}

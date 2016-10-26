@@ -10,17 +10,16 @@
 #include "Hashtable.h"
 
 
-
 CosineSim::CosineSim(string temp) 
 {
     id=temp;
     int count;
-    cout << id;
-    cout << "\n";
-    cout << "hello";
+    //cout << id;
+    //cout << "\n";
+    //cout << "hello";
     length = id.length();
-    cout << "hello";
-    cout << length;
+   // cout << "hello";
+    //cout << length;
    
    
     
@@ -41,8 +40,9 @@ string CosineSim :: getId()
 }
 
 string CosineSim::ConstructGFunctionC(int L, int k)
-{   srand(time(0));
-    cout << "bhka";
+{   
+   // cout << "bhka";
+    
     int i, x1, x2, p=0;
     int l; //length of the new array
     double r , res;
@@ -66,24 +66,29 @@ string CosineSim::ConstructGFunctionC(int L, int k)
    
    
     
-    
+    srand(time(0));
   
    
     string g;
     int j;
      for (j = 0; j < (k); j++)
     {
+        // r = marsagliarandom();
          //srand(time(0));
-        r = marsagliarandom();
+         
+               r = marsagliarandom(j);
+            
+            
+        
         cout << "\n\n\nto r einai:"<< r;
         for (int i=0;i<l;i++)
         {
-            cout << array[i]<< "\n";
+          //  cout << array[i]<< "\n";
             res = array[i]*r + res ; 
-            cout <<"res:" << res;
+           // cout <<"res:" << res;
             
         }
-        cout << res;
+       // cout << res;
         if(res >= 0)
         {
            
@@ -99,6 +104,7 @@ string CosineSim::ConstructGFunctionC(int L, int k)
         cout << g;
         //g = "0010";
     }
-
+    r=0;
+   
     return g;
 }

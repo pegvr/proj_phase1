@@ -18,7 +18,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-double marsagliarandom();
+double marsagliarandom(int j);
 int mod (int a, int b);
 
 #endif /* RANDOMFUNC_H */

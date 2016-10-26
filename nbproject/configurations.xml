@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>CosineSim.h</itemPath>
+      <itemPath>DistanceMatrix.h</itemPath>
       <itemPath>Euclidean.h</itemPath>
       <itemPath>Hamming.h</itemPath>
       <itemPath>Hashtable.h</itemPath>
@@ -19,12 +20,24 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>CosineSim.cpp</itemPath>
+      <itemPath>DistanceMatrix.cpp</itemPath>
       <itemPath>Euclidean.cpp</itemPath>
       <itemPath>Hamming.cpp</itemPath>
       <itemPath>Hashtable.cpp</itemPath>
       <itemPath>LinkedList.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>randomfunc.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -51,12 +64,17 @@
           <linkerDynSerch>
             <pElem>.</pElem>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </linkerDynSerch>
         </linkerTool>
       </compileType>
       <item path="CosineSim.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CosineSim.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DistanceMatrix.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DistanceMatrix.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Euclidean.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -77,6 +95,7 @@
       <folder path="TestFiles">
         <linkerTool>
           <linkerDynSerch>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </linkerDynSerch>
@@ -112,12 +131,17 @@
           <linkerDynSerch>
             <pElem>.</pElem>
             <pElem>.</pElem>
+            <pElem>.</pElem>
           </linkerDynSerch>
         </linkerTool>
       </compileType>
       <item path="CosineSim.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="CosineSim.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="DistanceMatrix.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="DistanceMatrix.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Euclidean.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -138,6 +162,7 @@
       <folder path="TestFiles">
         <linkerTool>
           <linkerDynSerch>
+            <pElem>.</pElem>
             <pElem>.</pElem>
             <pElem>.</pElem>
           </linkerDynSerch>

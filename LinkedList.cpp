@@ -41,10 +41,10 @@ LinkedList::~LinkedList()
 }
 
 // Inserts an item at the end of the list.
-void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint)
+void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint, int * Row)
 {
-   // cout << "linked list insert id = " << newPoint->getId()<< endl;
-    Point *temp = new Point(HammingPoint, CosinePoint, EuclideanPoint);
+    //cout << "linked list insert id = " << CosinePoint->getId()<< endl;
+    Point *temp = new Point(HammingPoint, CosinePoint, EuclideanPoint, Row);
     //cout << "linked list 1" << endl;
     if (!head -> next)
     {
@@ -99,7 +99,7 @@ void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Eucl
 }*/
 
 // Displays list contents to the console window.
-void LinkedList::printList(string method)
+void LinkedList::printList(string method, int counter)
 {
     //cout << "print 1" << endl;
     if (length == 0)
@@ -109,17 +109,20 @@ void LinkedList::printList(string method)
     }
     //cout << "print 2" << endl;
     Point * p = head->next;
-   //cout << "print 3" << endl;
+    //cout << "print 3" << endl;
     cout << "\n{ ";
     while (p)
     {
         //cout << "print 4" << endl;
         if (method == "@metric_space hamming")
-            cout << p -> hamming_key->getId();
+            cout << p->hamming_key->getId();
         else if (method == "@metric_space cosine")
-            cout << p -> cosine_key->getId();
-        else 
+            cout << p->cosine_key->getId();
+        else if (method == "@metric_space euclidean")
             cout << p -> euclidean_key->getId();
+        else
+            for (int i = 0; i < counter; i++)
+                cout << p->row[i]<< "\t";
         //cout << "print 5" << endl;
         if (p -> next) cout << ", ";
         else break;
@@ -127,19 +130,6 @@ void LinkedList::printList(string method)
         p = p->next;
         //cout << "print 7" << endl;
     }
-    /*Point * q = head;
-    cout << "\n{ ";
-    while (q)
-    {
-        p = q;
-        if (p != head)
-        {
-            cout << p -> key;
-            if (p -> next) cout << ", ";
-            else cout << " ";
-        }
-        q = p -> next;
-    }*/
     cout << "}\n";
 }
 
