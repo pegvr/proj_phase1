@@ -1,10 +1,3 @@
-/* 
- * File:   DistanceMatrix.cpp
- * Author: angelique
- * 
- * Created on October 25, 2016, 4:04 PM
- */
-
 #include "DistanceMatrix.h"
 
 
@@ -18,6 +11,7 @@ DistanceMatrix::DistanceMatrix(char *file, int counter, int k)
         Array[i] = new int[NumOfRecords];   
         for(int j = 0; j < NumOfRecords; j++) Array[i][j] = 0;
     } 
+    cout << " i = " << i<< endl;
     string line, temp;
     ifstream myfile(file);
     if (myfile.is_open())
@@ -28,24 +22,40 @@ DistanceMatrix::DistanceMatrix(char *file, int counter, int k)
         {
             column = 0;
             string tmp;
-            for(i = 0; i < line.size() - 1; i++)
+            int c = 0;
+            size_t pos_s = 0, pos_e = 0;
+            istringstream iss(line);
+            while (getline(iss, tmp, '\t'))//for(i = 0; i < line.size()-1; i++)
             {
-                tmp = line[i];
+                //pos_s = pos_e;
+                //pos_e = line.find("\t");
+                //tmp = line.substr(0, pos_e);
+                //cout << "tmp = " << tmp << endl;
+                //tmp = line[i];
+                //cout << "tmp = " << tmp << endl;
+                //if (i == 3) break;
                 if(tmp != "\t")
                 {
+                    c++;
                     num = stoi(tmp,nullptr,10);                  
                     Array[row][column] = num;
                     column++;
 
                 }
+                
             }
-            row++;            
+            //cout << " c = " << c<< endl;
+            row++;   //break;         
         }
     }
     else cout << "Unable to open file"; 
     myfile.close();
     t1 = (k + 1) / 2;
     t2 = (rand() / (RAND_MAX + 1.0))*10000;
+    int rows =  sizeof Array / sizeof Array[0]; // 2 rows  
+
+    int cols = sizeof Array[0] / sizeof(int); // 5 cols
+    cout << "rows = " << row << " columns = " << column << endl;
 }
 
 DistanceMatrix::DistanceMatrix(const DistanceMatrix& orig) 
@@ -55,11 +65,8 @@ DistanceMatrix::DistanceMatrix(const DistanceMatrix& orig)
 
 DistanceMatrix::~DistanceMatrix() 
 {
-    for (int i = 0; i < NumOfRecords; i++ )
-    {
-        cout<< i<< endl;
-        delete[] Array[i];
-    }       
+    for (int i = 0; i < NumOfRecords; ++i )
+        delete[] Array[i];     
     delete [] Array;
 }
 
@@ -91,17 +98,14 @@ string DistanceMatrix:: ConstructGFunction(int item, int k)
     string g;
     for (i = 0; i < k ; i++)
     {        
-        int x11 = (rand() / (RAND_MAX + 1.0))*NumOfRecords;
-        int x22 = (rand() / (RAND_MAX + 1.0))*NumOfRecords;
-        //cout << x11 << "         " << x22 << '\n';
-        //int w = (pow(Array[item][x11], 2.0) + pow(Array[item][x22], 2.0) - pow(Array[x11][x22], 2.0)) / (2 * Array[x11][x22]);
-        int sum = (Array[item][x11]*Array[item][x11] + Array[item][x22]*Array[item][x22] - Array[x11][x22]*Array[x11][x22]);
-        //cout << "sum " << sum << endl;
-        int mult = Array[x11][x22] * 2;
-        //cout << "mult " << mult  <<  endl;
-        if (mult != 0)  h = sum / mult;
-        else  h = sum ;
-
+        int x1 = (rand() / (RAND_MAX + 1.0))*NumOfRecords;
+        int x2 = (rand() / (RAND_MAX + 1.0))*NumOfRecords;
+        //int w = (pow(Array[item][x1], 2.0) + pow(Array[item][x2], 2.0) - pow(Array[x1][x2], 2.0)) / (2 * Array[x1][x2]);
+        int dist = (Array[item][x1]*Array[item][x1] + Array[item][x2]*Array[item][x2] - Array[x1][x2]*Array[x1][x2]);
+        int mult = Array[x1][x2] * 2;
+        if (mult != 0)  h = dist / mult;
+        else  h = dist ;
+        
         if(h >= t1 && t2 >= h)
         {
             g = g + "1";

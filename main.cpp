@@ -35,6 +35,7 @@ Hashtable ** CreateHash(int L, int k, int tablesize)
 
 int main(int argc, char** argv) 
 {
+    srand(time(NULL));
     string line, temp, g;
     //if (argv[2] != NULL)
     ifstream myfile(argv[2]);
@@ -199,13 +200,13 @@ int main(int argc, char** argv)
                     PointersToHashtable[j]->InsertIntoHashtable(g, NULL, NULL, NULL, row, 0);
                 }
             }
-            //for (i = 0; i < L;i++) PointersToHashtable[i]->printTable("@metric_space matrix", counter);
+            for (i = 0; i < L;i++) PointersToHashtable[i]->printTable("@metric_space matrix", counter);
             for (i = 0; i < L; i++)  delete PointersToHashtable[i];
             delete distancematrix;
         }
     }
     else cout << "Unable to open file"; 
-    cout << "!!!" << endl;
+    //cout << "!!!" << endl;
     myfile.close();
     
     cout << "!!!!!!!!!!!!" << endl;
