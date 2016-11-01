@@ -41,6 +41,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Hamming.o \
 	${OBJECTDIR}/Hashtable.o \
 	${OBJECTDIR}/LinkedList.o \
+	${OBJECTDIR}/NeighbourSearch.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/randomfunc.o
 
@@ -98,6 +99,11 @@ ${OBJECTDIR}/LinkedList.o: LinkedList.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LinkedList.o LinkedList.cpp
+
+${OBJECTDIR}/NeighbourSearch.o: NeighbourSearch.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NeighbourSearch.o NeighbourSearch.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}

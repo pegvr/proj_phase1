@@ -1,13 +1,7 @@
-/* 
- * File:   Hashtable.h
- * Author: angelique
- *
- * Created on October 17, 2016, 6:47 PM
- */
-
 #ifndef HASHTABLE_H
 #define	HASHTABLE_H
 #include "LinkedList.h"
+#include <math.h>
 
 class Hashtable {
 public:
@@ -29,15 +23,14 @@ public:
     // Display the contents of the Hash Table to console window.
     void printTable(string method, int counter);
     
-    // Prints a histogram illustrating the Point distribution.
-    void printHistogram();
-    
+   
     // Returns the number of locations in the Hash Table.
     int getLength();
     
     // Returns the number of Points in the Hash Table.
     int getNumberOfPoints();
     void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int *Row, int fi);
+    int SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour);
 private:
     // Array is a reference to an array of Linked Lists.
     string name;
@@ -51,3 +44,4 @@ private:
     
 };
 #endif
+

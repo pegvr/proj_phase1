@@ -1,13 +1,6 @@
-/* 
- * File:   LinkedList.cpp
- * Author: angelique
- * 
- * Created on October 17, 2016, 6:50 PM
- */
-
 #include "LinkedList.h"
 
-LinkedList::LinkedList() 
+LinkedList::LinkedList()            //Linked List Constructor
 {
     head = new Point;
     head -> next = NULL;
@@ -16,41 +9,27 @@ LinkedList::LinkedList()
 
 LinkedList::LinkedList(const LinkedList& orig) {
 }
+ 
 
-int i=0; 
-
-LinkedList::~LinkedList() 
+LinkedList::~LinkedList()       //Linked List Destructor
 {
-    //cout << "linked list destruct 1     " << i << endl;
     Point * p = head;
-    //cout << "linked list destruct 2" << endl;
     Point * q = head;
-    //cout << "linked list destruct 3" << endl;
     while (q != NULL)
     {
-       // cout << "linked list destruct 4" << endl;
         p = q;
-        //cout << "linked list destruct 5" << endl;
         q = p -> next;
-        //cout << "linked list destruct 6" << endl;
         if (q != NULL) delete p;
-       // cout << "linked list destruct 7" << endl;
     }
-    i++;
-    //cout << "linked list destruct 8" << endl;
 }
 
-// Inserts an item at the end of the list.
+// Inserts an item at the head of the list.
 void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint, int * Row)
 {
-    //cout << "linked list insert id = " << CosinePoint->getId()<< endl;
     Point *temp = new Point(HammingPoint, CosinePoint, EuclideanPoint, Row);
-    //cout << "linked list 1" << endl;
-    if (!head -> next)
+    if (!head -> next)              //If list is empty insert here
     {
-        //cout << "linked list 2" << endl;
         head -> next = temp;
-        //cout << "linked list 3" << endl;
         length++;
         return;
     }
@@ -59,61 +38,124 @@ void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Eucl
     length++;
 }
 
-// Removes an item from the list by item key.
-// Returns true if the operation is successful.
-/*bool LinkedList::removePoint( string itemKey )
+
+
+void LinkedList::Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file)
 {
-    if (!head -> next) return false;
-    Point * p = head;
-    Point * q = head;
-    while (q)
+    int i;
+    if (length == 0)                //There are no points in bucket for searching
     {
-        if (q -> key == itemKey)
+        //cout << "\n bucket empty \n";
+        return;
+    }
+    if (Row != NULL)
+    {
+        for ( i = 0; i < counter; i++) 
+            if (Row[i] == 0) break;             //Item position
+        
+    }
+
+    Point * p = head->next;             //Start searching whole bucket for neighbour
+    while (p)
+    {
+        if (method == "@metric_space hamming")              //Choose method
         {
-            p -> next = q -> next;
-            delete q;
-            length--;
-            return true;
+            int diff = 0;
+            string temp2 = p->hamming_key->getId();
+            for (int i = 0; i < temp.size() ; i++)          //Find how many bits are different
+                if (temp[i] != temp2[i]) diff++;
+            if (diff < radius)                              //If we found wanted distance print into file
+                file <<  p->hamming_key->getName() << endl;
         }
-        p = q;
-        q = p -> next;
-    }
-    return false;
-}*/
+        else if (method == "@metric_space euclidean")   //Choose method
+        {
+            int num = 0, sum = 0;
+            string temp2 = p->euclidean_key->getId(), h;
+            for(i = 0; i < length; i++)                     //Count how many dimensions the point has
+            {
+                h = temp2[i];
+                if(h == "\t")   num++;
+            }
+            double array1[num + 1];                         //Array to store each distance of bucket point
+            istringstream iss(temp2);
+            for (auto& i : array1)                          //For every distance, store it
+            {
+                iss >> i;
+            }
+            double array2[num + 1];                         //Array to store each distance of query point
+            istringstream iss2(temp);
+            for (auto& i : array2)                          //For every distance, store it
+            {
+                iss2 >> i;
+            }
+            for (int i = 0; i < num + 1 ; i++)              //Calculate "almost" euclidean distance 
+                sum += (array1[i] - array2[i]) * ((array1[i] - array2[i]));
 
-// Searches for an item by its key.
-// Returns a reference to first match.
-// Returns a NULL pointer if no match is found.
-/*Point * LinkedList::getPoint( string itemKey )
-{
-    Point * p = head;
-    Point * q = head;
-    while (q)
-    {
-        p = q;
-        if ((p != head) && (p -> key == itemKey))
-            return p;
-        q = p -> next;
+            if (sqrt(sum) < radius)                         //Check if wanted distance has been found
+                file << p->euclidean_key->getName() << endl;
+                
+        }
+        else if (method == "@metric_space cosine")          //Cosine method 
+        {
+            int num = 0, norma1 = 0, norma2 = 0, inner_product = 0;
+            string temp2 = p->cosine_key->getId(), h;
+            for(i = 0; i < length; i++)                     //Count how many dimensions the point has
+            {
+                h = temp2[i];
+                if(h == "\t")   num++;
+            }
+            double array1[num + 1];                         //Array to store each dimension of bucket point
+            istringstream iss(temp2);
+            for (auto& i : array1)                          //For every dimension, store it
+            {
+                iss>> i;
+            }
+            for(i = 0; i < num + 1; i++)
+                norma1 += array1[i] * array1[i];           //norma of bucket point
+            norma1 = sqrt(norma1);
+            double array2[num + 1];                         //Array to store each dimension of query point
+            istringstream iss2(temp);
+            for (auto& i : array2)                          //For every dimension, store it
+            {
+                iss2>> i;
+            }
+            for(i = 0; i < num + 1; i++)
+                norma2 += array2[i] * array2[i];        //norma of query point
+            norma2 = sqrt(norma2); 
+            for(i = 0; i < num + 1; i++)
+                inner_product += array1[i] * array2[i];          //inner product of query and bucket point
+            int dist = 1 - (inner_product / (norma1 * norma2));
+            if (dist < radius)
+               file << p->cosine_key->getName() << endl; 
+        }
+        else
+        {
+            /*int j;           
+            for ( j = 0; j < counter; j++)
+                if (p->row[j] == 0) break;
+            
+            if (Row[j] == p->row[i] && Row[j] > 0)
+                if (Row[j] < radius )
+                    file << "item" << j << endl;*/
+        }
+        p = p->next;
     }
-    return NULL;
-}*/
+}
 
-// Displays list contents to the console window.
-void LinkedList::printList(string method, int counter)
+
+
+void LinkedList::printList(string method, int counter)      //Print whole bucket
 {
-    //cout << "print 1" << endl;
+
     if (length == 0)
     {
         cout << "\n{ }\n";
         return;
     }
-    //cout << "print 2" << endl;
     Point * p = head->next;
-    //cout << "print 3" << endl;
     cout << "\n{ ";
     while (p)
     {
-        //cout << "print 4" << endl;
         if (method == "@metric_space hamming")
             cout << p->hamming_key->getId();
         else if (method == "@metric_space cosine")
@@ -123,12 +165,9 @@ void LinkedList::printList(string method, int counter)
         else
             for (int i = 0; i < counter; i++)
                 cout << p->row[i]<< "\t";
-        //cout << "print 5" << endl;
         if (p -> next) cout << ", ";
         else break;
-        //cout << "print 6" << endl;
         p = p->next;
-        //cout << "print 7" << endl;
     }
     cout << "}\n";
 }
@@ -137,4 +176,120 @@ void LinkedList::printList(string method, int counter)
 int LinkedList::getLength()
 {
     return length;
+}
+
+//NN_Search same as Search function with only difference that looks for min distance
+string LinkedList::NN_Search(int L, int radius, string temp,string item, Euclidean *EuclideanPoint, int * Row, string method, int &distance)
+{
+    int MAX= 1000;
+    int i; 
+    string b;
+    //for (i = 0; i < L; i++)
+    //{
+        if (length == 0)
+        {
+            //cout << "\n bucket empty \n";
+            return b;
+        }
+        Point * p = head->next;
+        while (p)
+        {
+            if (method == "@metric_space hamming")
+            {
+                int diff = 0;
+                string temp2 = p->hamming_key->getId();
+
+                for (int i = 0; i < temp.size(); i++)
+                    if (temp[i] != temp2[i]) diff++;
+                if (diff < MAX)                         //Looks for min hamming distance
+                {
+                    b = p->hamming_key->getName();
+                    distance = diff;
+                    MAX = diff;
+                }
+            }
+            else if (method == "@metric_space euclidean")
+            {
+                int num = 0, sum = 0;
+                string temp2 = p->euclidean_key->getId(), h;
+                for(i = 0; i < length; i++)
+                {
+                    h = temp2[i];
+                    if(h == "\t")   num++;
+                }
+                double array1[num + 1];
+                istringstream iss(temp2);
+                for (auto& i : array1)
+                {
+                    iss>> i;
+                }
+                double array2[num + 1];
+                istringstream iss2(temp);
+                for (auto& i : array2)
+                {
+                    iss2>> i;
+                }
+                for (int i = 0; i < num + 1 ; i++)
+                    sum += (array1[i] - array2[i]) * ((array1[i] - array2[i]));
+
+                if (sqrt(sum) < MAX)                    //Looks for min euclidean distance
+                {
+                    b = p->euclidean_key->getName();
+                    distance = sqrt(sum);
+                    MAX = sqrt(sum);
+                    if (p->next == NULL) return b;
+                }
+                
+            }
+            else if (method == "@metric_space cosine")
+            {
+                int num = 0, norma1 = 0, norma2 = 0, inner_product = 0;
+                string temp2 = p->cosine_key->getId(), h;
+                for(i = 0; i < length; i++)
+                {
+                    h = temp2[i];
+                    if(h == "\t")   num++;
+                }
+                double array1[num + 1];
+                std :: istringstream iss(temp2);
+                for (auto& i : array1)
+                {
+                    iss>> i;
+                }
+                for(i = 0; i < num + 1; i++)
+                    norma1 += array1[i] * array1[i];           //norma
+                norma1 = sqrt(norma1);
+                double array2[num + 1];
+                istringstream iss2(temp);
+                for (auto& i : array2)
+                {
+                    iss2>> i;
+                }
+                for(i = 0; i < num + 1; i++)
+                    norma2 += array2[i] * array2[i];        //norma 
+                norma2 = sqrt(norma2); 
+                for(i = 0; i < num + 1; i++)
+                    inner_product += array1[i] * array2[i];             //inner product
+                int dist = 1 - (inner_product / (norma1 * norma2));     //Cosine distance
+                
+                if (dist < MAX)                             //Looks for min cosine distance
+                {
+                    b = p->cosine_key->getName();
+                    MAX = dist;
+                    distance = dist;
+                    if (p->next == NULL) return b;
+                }
+                    
+            }
+            else
+            {
+                //.......
+                return b;
+            }
+                
+            p = p->next;
+
+        }
+    //}
+    return b;
 }

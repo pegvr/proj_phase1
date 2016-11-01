@@ -1,10 +1,3 @@
-/* 
- * File:   Hamming.h
- * Author: angelique
- *
- * Created on October 17, 2016, 9:16 PM
- */
-
 #ifndef HAMMING_H
 #define	HAMMING_H
 
@@ -17,16 +10,16 @@ using namespace std;
 
 class Hamming {
 public:
-    Hamming(string temp);
+    Hamming(string temp, string temp1);
     Hamming(const Hamming& orig);
     virtual ~Hamming();
-    string ConstructGFunction(int L, int k);
+    string ConstructGFunction(int k);
     string getId();
+    string getName();
 private:
-    string id;
+    string id, name;
     int length;
 };
 
 
 #endif	/* HAMMING_H */
-

@@ -1,29 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-#include <sstream>
 #include "CosineSim.h"
-#include "randomfunc.h"
-#include "time.h"
-#include "Hashtable.h"
 
 
-CosineSim::CosineSim(string temp) 
+CosineSim::CosineSim(string temp,string temp1) 
 {
-    id=temp;
-    int count;
-    //cout << id;
-    //cout << "\n";
-    //cout << "hello";
+    name = temp1;               //Name = itemY
+    id=temp;                    //id = distances from other items
     length = id.length();
-   // cout << "hello";
-    //cout << length;
-   
-   
-    
-    
 }
 
 CosineSim::CosineSim(const CosineSim& orig) {
@@ -31,7 +13,7 @@ CosineSim::CosineSim(const CosineSim& orig) {
 
 CosineSim::~CosineSim() 
 {
-    cout << "Cosine is destroyed";
+    //cout << "Cosine is destroyed" << endl;
 }
 
 string CosineSim :: getId()
@@ -39,72 +21,48 @@ string CosineSim :: getId()
     return id;
 }
 
-string CosineSim::ConstructGFunctionC(int L, int k)
+string CosineSim :: getName()
+{
+    return name;
+}
+
+string CosineSim::ConstructGFunctionC(int k)
 {   
-   // cout << "bhka";
-    
-    int i, x1, x2, p=0;
-    int l; //length of the new array
+    int i, p = 0;
     double r , res;
-    string h , f;
-    for(i=0;i<length;i++)
+    string h;
+    for(i = 0; i < length; i++)                 //Count how many distances from other items the point has
     {
-        h=id[i];
+        h = id[i];
         if(h == "\t")
         {
-            p=p+1;
+            p++;
         }
     }
-    l = p+1 ; 
-    cout << "number \n"<<l <<"\n";
-    double array[l];
-    std :: istringstream iss(id);
+    double array[p + 1];
+    istringstream iss(id);
     for (auto& i : array)
     {
         iss>> i;
     }
    
-   
-    
-    srand(time(0));
-  
-   
     string g;
     int j;
-     for (j = 0; j < (k); j++)
+    for (j = 0; j < k; j++)
     {
-        // r = marsagliarandom();
-         //srand(time(0));
-         
-               r = marsagliarandom(j);
-            
-            
-        
-        cout << "\n\n\nto r einai:"<< r;
-        for (int i=0;i<l;i++)
-        {
-          //  cout << array[i]<< "\n";
-            res = array[i]*r + res ; 
-           // cout <<"res:" << res;
-            
-        }
-       // cout << res;
+        r = marsagliarandom(j);
+        for (int i = 0;i < (p + 1);i++)
+
+            res += array[i]*r  ;      
+
         if(res >= 0)
-        {
-           
-             g = g + "0";
-             //cout << "\nto neo g einai :"<< g;
-        }
+            g = g + "0";
+
         else
-        {
-             g = g + "1";
-             //cout << "\nto neo g einai :"<< g;
-        }
-        
-        cout << g;
-        //g = "0010";
+            g = g + "1";
+
     }
-    r=0;
+    r = 0;
    
     return g;
 }

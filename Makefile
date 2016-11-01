@@ -81,14 +81,14 @@ clobber: .clobber-post
 
 
 # all
-all: main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o 
-	g++ -g main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o -o lsh -lm
+all: main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o NeighbourSearch.o 
+	g++ -g main.o LinkedList.o Hashtable.o Hamming.o CosineSim.o Euclidean.o DistanceMatrix.o randomfunc.o NeighbourSearch.o -o lsh -lm
 
 main.o: main.cpp Hamming.h Hashtable.h
-	g++ -c -g main.cpp
+	g++ -std=c++0x -c -g main.cpp
 
 LinkedList.o:LinkedList.cpp 
-	g++ -c -g LinkedList.cpp
+	g++ -std=c++0x -c -g LinkedList.cpp
 
 Hashtable.o: Hashtable.cpp LinkedList.h Hashtable.h
 	g++ -c -g Hashtable.cpp 
@@ -107,6 +107,9 @@ Euclidean.o: Euclidean.cpp Euclidean.h
 	
 randomfunc.o: randomfunc.cpp randomfunc.h
 	g++ -c -g randomfunc.cpp
+	
+NeighbourSearch.o: NeighbourSearch.cpp NeighbourSearch.h Hashtable.h Hamming.h
+	g++ -c -g NeighbourSearch.cpp
 
 clean:
 	rm -f *.o lsh

@@ -1,21 +1,12 @@
-/* 
- * File:   Hashtable.cpp
- * Author: angelique
- * 
- * Created on October 17, 2016, 6:47 PM
- */
-
 #include "Hashtable.h"
 #include "Hamming.h"
-#include <math.h>
 
 
-Hashtable::Hashtable(string temp, int k, int tablesize) 
+Hashtable::Hashtable(string temp, int k, int tablesize) //Hashtable Constructor
 {
     name = temp;
-    if (tablesize == 0) length = pow(2.0, k);
-    else length = tablesize / 16;
-    cout << "length " << length << endl;
+    if (tablesize == 0) length = pow(2.0, k);   //Length for Hamming,Cosine and DistanceMatrix
+    else length = tablesize / 16;               //Length for Euclidean
     array = new LinkedList[ length ];
 }
 
@@ -24,78 +15,62 @@ Hashtable::Hashtable(const Hashtable& orig) {
 
 Hashtable::~Hashtable() 
 {
-    //cout << "hashtable destruct 1" << endl;
     delete [] array;
-   // cout << "hashtable destruct 2" << endl;
 }
 
-// Returns an array location for a given item key.
-int Hashtable::hash( string itemKey )
-{
-    int value = 0;
-    for (int i = 0; i < itemKey.length(); i++)
-        value += itemKey[i];
-    return (itemKey.length() * value) % length;
-}
-int Hashtable::getLength()
-{
-    return length;
-}
-// Adds an item to the Hash Table.
-void Hashtable::insertPoint( Point * newPoint )
-{
-    //int index = hash( newPoint -> key );
-    //array[ index ].insertPoint( newPoint );
-}
 
 void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint,int *Row, int fi)
 {    
-    
-    //cout << "1 " << temp << endl;
-    if (fi == 0)
+    if (fi == -1)       //Insert for Hamming,Cosine and DistanceMatrix
     {
         const char *point = temp.c_str();
-        int ind = strtol(point, NULL, 2);
-        cout << "temp = " << temp << "index = " << ind << endl;
-        array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint,Row);
+        int index = strtol(point, NULL, 2); 
+        array[index].insertPoint(HammingPoint, CosinePoint, EuclideanPoint, Row);
     }
-    else
-    { int ind = fi;
-    //cout << "3" << endl;
-        array[ind].insertPoint(HammingPoint, CosinePoint, EuclideanPoint,Row);}
-    //array[index].printList();
-    //cout << "4" << endl;
+    else{       //Insert for Euclidean
+        array[fi].insertPoint(HammingPoint, CosinePoint, EuclideanPoint, Row);
+    }
 }
 
-// Deletes an Point by key from the Hash Table.
-// Returns true if the operation is successful.
-/*bool Hashtable::removePoint( string itemKey )
+int Hashtable:: SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour)
 {
-    int index = hash( itemKey );
-    return array[ index ].removePoint( itemKey );
+    int distance = 0;
+    //string neighbor;
+    if (fi == -1)       //SearchBucket for Hamming,Cosine and DistanceMatrix
+    {
+        const char *point = temp.c_str();
+        int index = strtol(point, NULL, 2); 
+        if (func == 1) array[index].Search(radius, temp1, item, counter, Row, method, file);
+        else        //SearchBucket for Euclidean
+        {
+            neighbour = array[index].NN_Search(L, radius, temp1, item,  NULL, Row, method, distance);
+            //file << "NN found   " <<  neighbor << endl;
+        }
+    }
+    else{
+        if (func == 1)  array[fi].Search(radius, temp1, item, counter, Row, method, file);
+        else
+        {            
+            neighbour = array[fi].NN_Search(L, radius, temp1, item,  NULL, Row, method, distance);
+            //file << "NN found   " << neighbor << endl;
+        }
+    }
+    return distance;
 }
 
-// Returns an item from the Hash Table by key.
-// If the item isn't found, a null pointer is returned.
-Point * Hashtable::getPointByKey( string itemKey )
-{
-    int index = hash( itemKey );
-    return array[index].getPoint( itemKey );
-}*/
 
-// Display the contents of the Hash Table to console window.
 void Hashtable::printTable(string method, int counter)
 {
-    //cout << "print table 1" << endl;
-    cout << length;
-    //cout << "print table 2" << endl;
-    cout << "\nHash Table:\n";
-    
+    //cout << length;
+    cout << "\nHash Table:\n";   
     for (int i = 0; i < length; i++)
     {
-        //cout << "print table 3" << endl;
         cout << "\nBucket " << i << ": ";
         array[i].printList(method, counter);
-        //cout << "print table 4" << endl;
     }
+}
+
+int Hashtable::getLength()
+{
+    return length;
 }

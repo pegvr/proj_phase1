@@ -1,18 +1,13 @@
-/* 
- * File:   LinkedList.h
- * Author: angelique
- *
- * Created on October 17, 2016, 6:50 PM
- */
-
 #ifndef LINKEDLIST_H
 #define	LINKEDLIST_H
-
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 #include "Hamming.h"
 #include "CosineSim.h"
 #include "Euclidean.h"
+#include <math.h>
 
 struct Point
 {
@@ -51,8 +46,9 @@ public:
     virtual ~LinkedList();
     // Inserts an item at the end of the list.
     void insertPoint( Hamming * newPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint, int * Row);
-    
+    void Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file);
     void printList(string method, int counter);
+    string NN_Search(int L,int radius, string temp,string item,Euclidean *EuclideanPoint, int * Row, string method, int &distance);
     
     // Returns the length of the list.
     int getLength();
@@ -62,7 +58,6 @@ private:
     // Length is the number of data nodes.
     int length;
 };
+
 #endif	/* LINKEDLIST_H */
-
-
 

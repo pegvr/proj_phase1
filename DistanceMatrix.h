@@ -1,4 +1,9 @@
-
+/* 
+ * File:   DistanceMatrix.h
+ * Author: angelique
+ *
+ * Created on October 25, 2016, 4:03 PM
+ */
 
 #ifndef DISTANCEMATRIX_H
 #define	DISTANCEMATRIX_H
@@ -22,13 +27,13 @@ public:
     void  PrintMatrix();
     int*  getRow(int i);
     int  getNumOfRecors();
+    string getName();
     string ConstructGFunction(int item,int k);
 private:
     int **Array;
     int NumOfRecords, t1, t2;
+    string name;
 };
 
 #endif	/* DISTANCEMATRIX_H */
-
-
 
