@@ -5,6 +5,9 @@
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sstream>
+#include "randomfunc.h"
+#include "time.h"
 
 using namespace std;
 

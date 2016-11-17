@@ -12,14 +12,9 @@ public:
     // Adds an item to the Hash Table.
     void insertPoint( Point * newPoint );
     
-    // Deletes an Point by key from the Hash Table.
-    // Returns true if the operation is successful.
-    bool removePoint( string itemKey );
     
     // Returns an item from the Hash Table by key.
-    // If the item isn't found, a null pointer is returned.
-    Point * getPointByKey( string itemKey );
-    
+    // If the item isn't found, a null pointer is return
     // Display the contents of the Hash Table to console window.
     void printTable(string method, int counter);
     
@@ -30,7 +25,7 @@ public:
     // Returns the number of Points in the Hash Table.
     int getNumberOfPoints();
     void InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int *Row, int fi);
-    int SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour);
+    int SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour,int columns);
 private:
     // Array is a reference to an array of Linked Lists.
     string name;

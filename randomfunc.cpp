@@ -39,3 +39,10 @@ int mod (int a, int b)
         ret+=b;
     return ret;
 }
+
+/*long long int combine(long long int a, int b) {
+   int times = 1;
+   while (times <= b)
+      times *= 10;
+   return a*times + b;
+} */

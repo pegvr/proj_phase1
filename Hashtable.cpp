@@ -32,7 +32,7 @@ void Hashtable::InsertIntoHashtable(string temp, Hamming *HammingPoint, CosineSi
     }
 }
 
-int Hashtable:: SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour)
+int Hashtable:: SearchBucket(int L, string temp, string temp1, string item, int counter, int *Row, int fi, string method, int radius, ofstream& file, int func, string &neighbour, int columns)
 {
     int distance = 0;
     //string neighbor;
@@ -40,7 +40,7 @@ int Hashtable:: SearchBucket(int L, string temp, string temp1, string item, int 
     {
         const char *point = temp.c_str();
         int index = strtol(point, NULL, 2); 
-        if (func == 1) array[index].Search(radius, temp1, item, counter, Row, method, file);
+        if (func == 1) array[index].Search(radius, temp1, item, counter, Row, method, file, columns);
         else        //SearchBucket for Euclidean
         {
             neighbour = array[index].NN_Search(L, radius, temp1, item,  NULL, Row, method, distance);
@@ -48,7 +48,7 @@ int Hashtable:: SearchBucket(int L, string temp, string temp1, string item, int 
         }
     }
     else{
-        if (func == 1)  array[fi].Search(radius, temp1, item, counter, Row, method, file);
+        if (func == 1)  array[fi].Search(radius, temp1, item, counter, Row, method, file, 0);
         else
         {            
             neighbour = array[fi].NN_Search(L, radius, temp1, item,  NULL, Row, method, distance);

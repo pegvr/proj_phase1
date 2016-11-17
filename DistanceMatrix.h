@@ -22,16 +22,18 @@ using namespace std;
 class DistanceMatrix {
 public:
     DistanceMatrix(char *file, int counter, int k);
+    DistanceMatrix(char *file,int numofrecords, int counter, int k) ;
     DistanceMatrix(const DistanceMatrix& orig);
     virtual ~DistanceMatrix();
     void  PrintMatrix();
     int*  getRow(int i);
     int  getNumOfRecors();
+    int getNumOfColumns();
     string getName();
     string ConstructGFunction(int item,int k);
 private:
     int **Array;
-    int NumOfRecords, t1, t2;
+    int NumOfRecords, t1, t2, NumOfColumns;
     string name;
 };
 

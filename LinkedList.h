@@ -26,10 +26,7 @@ struct Point
     };
     Point(Hamming *HammingPoint, CosineSim *CosinePoint,Euclidean *EuclideanPoint, int *Row)
     {
-        //cout << "!!!!" << endl;
-        //cout << "point " << newPoint->getId() << endl;
-        //key = newPoint; 
-
+        
         hamming_key = HammingPoint;
         euclidean_key = EuclideanPoint;
         cosine_key = CosinePoint;
@@ -46,7 +43,7 @@ public:
     virtual ~LinkedList();
     // Inserts an item at the end of the list.
     void insertPoint( Hamming * newPoint,CosineSim *CosinePoint,Euclidean *EuclideanPoint, int * Row);
-    void Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file);
+    void Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file, int columns);
     void printList(string method, int counter);
     string NN_Search(int L,int radius, string temp,string item,Euclidean *EuclideanPoint, int * Row, string method, int &distance);
     

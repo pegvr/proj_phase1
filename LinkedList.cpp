@@ -40,7 +40,7 @@ void LinkedList::insertPoint( Hamming * HammingPoint,CosineSim *CosinePoint,Eucl
 
 
 
-void LinkedList::Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file)
+void LinkedList::Search(int radius, string temp,string item, int counter, int * Row, string method, ofstream& file, int columns)
 {
     int i;
     if (length == 0)                //There are no points in bucket for searching
@@ -51,8 +51,8 @@ void LinkedList::Search(int radius, string temp,string item, int counter, int * 
     if (Row != NULL)
     {
         for ( i = 0; i < counter; i++) 
-            if (Row[i] == 0) break;             //Item position
-        
+            if (Row[i] == 0) {break;}             //Item position
+        cout << "Query Item ==  " << i << endl;
     }
 
     Point * p = head->next;             //Start searching whole bucket for neighbour
@@ -130,13 +130,24 @@ void LinkedList::Search(int radius, string temp,string item, int counter, int * 
         }
         else
         {
-            /*int j;           
-            for ( j = 0; j < counter; j++)
-                if (p->row[j] == 0) break;
-            
-            if (Row[j] == p->row[i] && Row[j] > 0)
-                if (Row[j] < radius )
-                    file << "item" << j << endl;*/
+            int j;                                      
+               /* for ( j = 0; j < columns; j++)
+                {
+                    if(Row[j] < radius && Row[j] > 0)
+                        cout << "item" << j << endl;
+                }*/
+
+                    if(p->row[i] < radius && p->row[i] > 0 )
+                    {
+                        //cout << p->row[i] << endl;
+                        for ( j = 0; j < columns; j++){
+                            //cout << p->row[i] << endl;
+                            if (p->row[j] == 0){
+                                file << "item" << j+1 << endl;
+                                break;
+                            }
+                        }
+                    }
         }
         p = p->next;
     }

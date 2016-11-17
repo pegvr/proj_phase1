@@ -8,5 +8,6 @@
 
 double marsagliarandom(int j);
 int mod (int a, int b);
+long long int combine(long long int a, int b);
 
 #endif /* RANDOMFUNC_H */
